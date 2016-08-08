@@ -40,7 +40,7 @@ defmodule ExErlstats do
 
   @doc """
   ## Example
-  
+
       ExErlstats.memory
       %{atom: 388625, atom_used: 367118, binary: 170776, code: 9396647, ets: 598128,
         processes: 6469296, processes_used: 6468312, system: 16370224,
@@ -76,7 +76,7 @@ defmodule ExErlstats do
     [:check_io, :otp_release, :port_count, :port_limit, :process_count,
       :process_limit, :schedulers, :schedulers_online, :version]
     |> Stream.map(fn x ->
-      {x, :erlang.system_info(x)}
+      {x, charlist_to_str({x, :erlang.system_info(x)})}
     end)
     |> Enum.into(%{})
   end
@@ -107,4 +107,7 @@ defmodule ExErlstats do
     end)
     |> Enum.into(%{})
   end
+
+  def charlist_to_str({k, v}) when k in [:otp_release, :version], do: {k, List.to_string(v)}
+  def charlist_to_str({k, v}), do: {k, v}
 end

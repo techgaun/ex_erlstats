@@ -17,8 +17,8 @@ defmodule ExErlstats do
        kernel_poll: false, memory_size: 66200, total_poll_set_size: 3,
        lazy_updates: true, pending_updates: 0, batch_updates: false,
        concurrent_updates: false, max_fds: 1024, active_fds: 0],
-      otp_release: '19', port_count: 5, port_limit: 65536, process_count: 49,
-      process_limit: 262144, schedulers: 4, schedulers_online: 4, version: '8.0'}}
+      otp_release: "19", port_count: 5, port_limit: 65536, process_count: 49,
+      process_limit: 262144, schedulers: 4, schedulers_online: 4, version: "8.0"}}
   """
   def get_all do
     %{
@@ -68,9 +68,9 @@ defmodule ExErlstats do
       %{check_io: [name: :erts_poll, primary: :poll, fallback: false,
          kernel_poll: false, memory_size: 66200, total_poll_set_size: 3,
          lazy_updates: true, pending_updates: 0, batch_updates: false,
-         concurrent_updates: false, max_fds: 1024, active_fds: 0], otp_release: '19',
+         concurrent_updates: false, max_fds: 1024, active_fds: 0], otp_release: "19",
         port_count: 5, port_limit: 65536, process_count: 49, process_limit: 262144,
-        schedulers: 4, schedulers_online: 4, version: '8.0'}
+        schedulers: 4, schedulers_online: 4, version: "8.0"}
   """
   def system_info do
     [:check_io, :otp_release, :port_count, :port_limit, :process_count,

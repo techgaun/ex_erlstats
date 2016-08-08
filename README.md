@@ -41,8 +41,8 @@ You can get information about
      kernel_poll: false, memory_size: 66200, total_poll_set_size: 3,
      lazy_updates: true, pending_updates: 0, batch_updates: false,
      concurrent_updates: false, max_fds: 1024, active_fds: 0],
-    otp_release: '19', port_count: 5, port_limit: 65536, process_count: 49,
-    process_limit: 262144, schedulers: 4, schedulers_online: 4, version: '8.0'}}
+    otp_release: "19", port_count: 5, port_limit: 65536, process_count: 49,
+    process_limit: 262144, schedulers: 4, schedulers_online: 4, version: "8.0"}}
 
 > ExErlstats.stats                     
 %{run_queue: 0, run_queue_lengths: [0, 0, 0, 0],
@@ -56,9 +56,9 @@ You can get information about
 %{check_io: [name: :erts_poll, primary: :poll, fallback: false,
    kernel_poll: false, memory_size: 66200, total_poll_set_size: 3,
    lazy_updates: true, pending_updates: 0, batch_updates: false,
-   concurrent_updates: false, max_fds: 1024, active_fds: 0], otp_release: '19',
+   concurrent_updates: false, max_fds: 1024, active_fds: 0], otp_release: "19",
   port_count: 5, port_limit: 65536, process_count: 49, process_limit: 262144,
-  schedulers: 4, schedulers_online: 4, version: '8.0'}
+  schedulers: 4, schedulers_online: 4, version: "8.0"}
 
 > ExErlstats.system_info[:port_count]
 5

@@ -4,9 +4,14 @@ defmodule ExErlstats.Mixfile do
   def project do
     [app: :ex_erlstats,
      version: "0.1.0",
-     elixir: "~> 1.3",
+     name: "ExErlstats",
+     source_url: "https://github.com/techgaun/ex_erlstats",
+     homepage_url: "https://github.com/techgaun",
+     elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     docs: [extras: ["README.md"]],
+     package: package,
      deps: deps()]
   end
 
@@ -27,6 +32,20 @@ defmodule ExErlstats.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:ex_doc, "~> 0.12", only: :dev},
+
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: [
+        "Samar Acharya"
+      ],
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/Brightergy/ex_gecko"},
+      files: ~w(config lib mix.exs README.md LICENSE)
+    ]
   end
 end

@@ -1,4 +1,4 @@
-# ExErlstats
+# ExErlstats [![Hex version](https://img.shields.io/hexpm/v/ex_erlstats.svg "Hex version")](https://hex.pm/packages/ex_erlstats) ![Hex downloads](https://img.shields.io/hexpm/dt/ex_erlstats.svg "Hex downloads")
 
 > Get statistics about Erlang VM
 
@@ -23,6 +23,11 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     ```
 
 ## Examples
+
+You can get information about
+- memory such as total allocated memory, total amount of memory allocated for atoms, etc.
+- system such as port limits, current port counts, processes counts, etc.
+- erlang statistics such as total run queue length, total active tasks, etc.
 
 ```shell
 > ExErlstats.get_all

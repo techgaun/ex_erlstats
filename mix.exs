@@ -5,6 +5,7 @@ defmodule ExErlstats.Mixfile do
     [app: :ex_erlstats,
      version: "0.1.0",
      name: "ExErlstats",
+     description: "A simple module to get erlang VM stats",
      source_url: "https://github.com/techgaun/ex_erlstats",
      homepage_url: "https://github.com/techgaun",
      elixir: "~> 1.2",

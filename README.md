@@ -2,6 +2,8 @@
 
 > Get statistics about Erlang VM
 
+![How It Looks Like](images/erlstats.gif)
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:

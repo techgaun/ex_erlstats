@@ -108,6 +108,6 @@ defmodule ExErlstats do
     |> Enum.into(%{})
   end
 
-  def charlist_to_str({k, v}) when k in [:otp_release, :version], do: {k, List.to_string(v)}
-  def charlist_to_str({k, v}), do: {k, v}
+  def charlist_to_str({k, v}) when k in [:otp_release, :version], do: String.Chars.to_string(v)
+  def charlist_to_str({_k, v}), do: v
 end

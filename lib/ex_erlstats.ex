@@ -6,7 +6,7 @@ defmodule ExErlstats do
   @doc """
   ## Example
 
-      ExErlstats.get_all
+      iex> ExErlstats.get_all
       %{memory: %{atom: 388625, atom_used: 365825, binary: 49296, code: 9059496,
       ets: 573344, processes: 6593256, processes_used: 6592272, system: 15867984,
       total: 22461240},
@@ -24,14 +24,15 @@ defmodule ExErlstats do
     %{
       memory: memory,
       system: system_info,
-      stats: stats
+      stats: stats,
+      processes: processes
     }
   end
 
   @doc """
   ## Example
 
-      ExErlstats.memory[:total]
+      iex> ExErlstats.memory[:total]
       22827520
   """
   def memory(key) do
@@ -41,7 +42,7 @@ defmodule ExErlstats do
   @doc """
   ## Example
 
-      ExErlstats.memory
+      iex> ExErlstats.memory
       %{atom: 388625, atom_used: 367118, binary: 170776, code: 9396647, ets: 598128,
         processes: 6469296, processes_used: 6468312, system: 16370224,
         total: 22839520}
@@ -54,7 +55,7 @@ defmodule ExErlstats do
   @doc """
   ## Example
 
-      ExErlstats.system_info[:port_count]
+      iex> ExErlstats.system_info[:port_count]
       5
   """
   def system_info(key) do
@@ -64,7 +65,7 @@ defmodule ExErlstats do
   @doc """
   ## Example
 
-      ExErlstats.system_info
+      iex> ExErlstats.system_info
       %{check_io: [name: :erts_poll, primary: :poll, fallback: false,
          kernel_poll: false, memory_size: 66200, total_poll_set_size: 3,
          lazy_updates: true, pending_updates: 0, batch_updates: false,
@@ -84,7 +85,7 @@ defmodule ExErlstats do
   @doc """
   ## Example
 
-      ExErlstats.stats[:total_active_tasks]
+      iex> ExErlstats.stats[:total_active_tasks]
       1
   """
   def stats(key) do
@@ -94,7 +95,7 @@ defmodule ExErlstats do
   @doc """
   ## Example
 
-      ExErlstats.stats
+      iex> ExErlstats.stats
       %{run_queue: 0, run_queue_lengths: [0, 0, 0, 0],
         scheduler_wall_time: :undefined, total_active_tasks: 1,
         total_run_queue_lengths: 0}
@@ -108,6 +109,29 @@ defmodule ExErlstats do
     |> Enum.into(%{})
   end
 
-  def charlist_to_str({k, v}) when k in [:otp_release, :version], do: String.Chars.to_string(v)
-  def charlist_to_str({_k, v}), do: v
+  @doc """
+  ## Example
+
+      iex> ExErlstats.processes
+      [[memory: 21640, heap_size: 1598, total_heap_size: 2585, message_queue_len: 0,
+      registered_name: :init], ...]
+  """
+  def processes do
+    for i <- Process.list, do: processes(i)
+  end
+
+  @doc """
+  ## Example
+
+      iex> ExErlstats.processes(#PID<0.0.0>)
+      [memory: 21640, heap_size: 1598, total_heap_size: 2585, message_queue_len: 0,
+      registered_name: :init]
+  """
+  def processes(pid) do
+    items = ~w(memory heap_size total_heap_size message_queue_len registered_name)a
+    for k <- items, do: Process.info(pid, k)
+  end
+
+  defp charlist_to_str({k, v}) when k in [:otp_release, :version], do: String.Chars.to_string(v)
+  defp charlist_to_str({_k, v}), do: v
 end

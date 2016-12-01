@@ -72,4 +72,12 @@ You can get information about
 
 > ExErlstats.memory[:total]
 22827520
+
+> ExErlstats.processes
+[[memory: 21640, heap_size: 1598, total_heap_size: 2585, message_queue_len: 0,
+registered_name: :init], ...]
+
+> ExErlstats.processes(#PID<0.0.0>)
+[memory: 21640, heap_size: 1598, total_heap_size: 2585, message_queue_len: 0,
+registered_name: :init]
 ```

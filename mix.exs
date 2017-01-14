@@ -12,7 +12,7 @@ defmodule ExErlstats.Mixfile do
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      docs: [extras: ["README.md"]],
-     package: package,
+     package: package(),
      deps: deps()]
   end
 

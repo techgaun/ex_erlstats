@@ -22,10 +22,10 @@ defmodule ExErlstats do
   """
   def get_all do
     %{
-      memory: memory,
-      system: system_info,
-      stats: stats,
-      processes: processes
+      memory: memory(),
+      system: system_info(),
+      stats: stats(),
+      processes: processes()
     }
   end
 
@@ -36,7 +36,7 @@ defmodule ExErlstats do
       22827520
   """
   def memory(key) do
-    memory[key]
+    memory()[key]
   end
 
   @doc """
@@ -59,7 +59,7 @@ defmodule ExErlstats do
       5
   """
   def system_info(key) do
-    system_info[key]
+    system_info()[key]
   end
 
   @doc """
@@ -89,7 +89,7 @@ defmodule ExErlstats do
       1
   """
   def stats(key) do
-    stats[key]
+    stats()[key]
   end
 
   @doc """
@@ -114,7 +114,7 @@ defmodule ExErlstats do
 
       iex> ExErlstats.processes
       [[memory: 21640, heap_size: 1598, total_heap_size: 2585, message_queue_len: 0,
-      registered_name: :init], ...]
+      registered_name: :init]]
   """
   def processes do
     for i <- Process.list, do: processes(i)

@@ -117,7 +117,11 @@ defmodule ExErlstats do
       registered_name: :init]]
   """
   def processes do
-    for i <- Process.list, do: processes(i)
+    Process.list
+    |> Stream.map(&processes/1)
+    |> Enum.filter(fn process_detail ->
+      Enum.all?(process_detail, &(not is_nil(&1)))
+    end)
   end
 
   @doc """

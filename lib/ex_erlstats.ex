@@ -48,7 +48,7 @@ defmodule ExErlstats do
         total: 22839520}
   """
   def memory do
-    :erlang.memory
+    :erlang.memory()
     |> Enum.into(%{})
   end
 
@@ -74,8 +74,17 @@ defmodule ExErlstats do
         schedulers: 4, schedulers_online: 4, version: "8.0"}
   """
   def system_info do
-    [:check_io, :otp_release, :port_count, :port_limit, :process_count,
-      :process_limit, :schedulers, :schedulers_online, :version]
+    [
+      :check_io,
+      :otp_release,
+      :port_count,
+      :port_limit,
+      :process_count,
+      :process_limit,
+      :schedulers,
+      :schedulers_online,
+      :version
+    ]
     |> Stream.map(fn x ->
       {x, charlist_to_str({x, :erlang.system_info(x)})}
     end)
@@ -101,8 +110,13 @@ defmodule ExErlstats do
         total_run_queue_lengths: 0}
   """
   def stats do
-    [:run_queue, :run_queue_lengths, :scheduler_wall_time, :total_active_tasks,
-      :total_run_queue_lengths]
+    [
+      :run_queue,
+      :run_queue_lengths,
+      :scheduler_wall_time,
+      :total_active_tasks,
+      :total_run_queue_lengths
+    ]
     |> Stream.map(fn x ->
       {x, :erlang.statistics(x)}
     end)
@@ -117,7 +131,7 @@ defmodule ExErlstats do
       registered_name: :init]]
   """
   def processes do
-    Process.list
+    Process.list()
     |> Stream.map(&processes/1)
     |> Enum.filter(fn process_detail ->
       Enum.all?(process_detail, &(not is_nil(&1)))
@@ -132,7 +146,9 @@ defmodule ExErlstats do
       registered_name: :init]
   """
   def processes(pid) do
-    items = ~w(memory heap_size total_heap_size message_queue_len registered_name status stack_size)a
+    items =
+      ~w(memory heap_size total_heap_size message_queue_len registered_name status stack_size)a
+
     for k <- items, do: Process.info(pid, k)
   end
 

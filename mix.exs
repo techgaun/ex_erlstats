@@ -2,18 +2,20 @@ defmodule ExErlstats.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :ex_erlstats,
-     version: "0.1.6",
-     name: "ExErlstats",
-     description: "A simple module to get erlang VM stats",
-     source_url: "https://github.com/techgaun/ex_erlstats",
-     homepage_url: "https://github.com/techgaun",
-     elixir: "~> 1.2",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     docs: [extras: ["README.md"]],
-     package: package(),
-     deps: deps()]
+    [
+      app: :ex_erlstats,
+      version: "0.1.6",
+      name: "ExErlstats",
+      description: "A simple module to get erlang VM stats",
+      source_url: "https://github.com/techgaun/ex_erlstats",
+      homepage_url: "https://github.com/techgaun",
+      elixir: "~> 1.2",
+      build_embedded: Mix.env() == :prod,
+      start_permanent: Mix.env() == :prod,
+      docs: [extras: ["README.md"]],
+      package: package(),
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -45,7 +47,10 @@ defmodule ExErlstats.Mixfile do
         "Samar Acharya"
       ],
       licenses: ["Apache-2.0"],
-      links: %{"GitHub" => "https://github.com/techgaun/ex_erlstats", "Website" => "http://samar.techgaun.com"},
+      links: %{
+        "GitHub" => "https://github.com/techgaun/ex_erlstats",
+        "Website" => "http://samar.techgaun.com"
+      },
       files: ~w(config lib mix.exs README.md LICENSE)
     ]
   end

@@ -147,7 +147,7 @@ defmodule ExErlstats do
   """
   def processes(pid) do
     items =
-      ~w(memory heap_size total_heap_size message_queue_len registered_name status stack_size)a
+      ~w(memory heap_size total_heap_size message_queue_len registered_name status stack_size reductions)a
 
     for k <- items, do: Process.info(pid, k)
   end

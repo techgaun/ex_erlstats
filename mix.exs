@@ -36,8 +36,7 @@ defmodule ExErlstats.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:ex_doc, "~> 0.13", only: :dev},
-      {:earmark, "~> 1.0", only: :dev}
+      {:ex_doc, "~> 0.23", only: :dev, runtime: false},
     ]
   end
 
@@ -49,7 +48,7 @@ defmodule ExErlstats.Mixfile do
       licenses: ["Apache-2.0"],
       links: %{
         "GitHub" => "https://github.com/techgaun/ex_erlstats",
-        "Website" => "http://samar.techgaun.com"
+        "Website" => "http://techgaun.com"
       },
       files: ~w(config lib mix.exs README.md LICENSE)
     ]

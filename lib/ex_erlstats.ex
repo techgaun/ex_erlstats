@@ -147,9 +147,18 @@ defmodule ExErlstats do
   """
   def processes(pid) do
     items =
-      ~w(memory heap_size total_heap_size message_queue_len registered_name status stack_size reductions)a
+      ~w(pid memory heap_size total_heap_size message_queue_len registered_name status stack_size reductions current_function initial_call)a
 
-    for k <- items, do: Process.info(pid, k)
+    for k <- items do
+      if k == :pid do
+        {k, inspect pid}
+      else
+        case Process.info(pid, k) do
+          {^k, {m, f, ac}} -> {k, "#{m}.#{f}/#{ac}"}
+          kv -> kv
+        end
+      end
+    end
   end
 
   defp charlist_to_str({k, v}) when k in [:otp_release, :version], do: String.Chars.to_string(v)

@@ -171,7 +171,7 @@ defmodule ExErlstats do
           kw
           |> Keyword.put(:gproc_type, type)
           |> Keyword.put(:gproc_scope, scope)
-          |> Keyword.put(:gproc_name, name)
+          |> Keyword.put(:gproc_name, "#{inspect name}")
 
         _ ->
           kw

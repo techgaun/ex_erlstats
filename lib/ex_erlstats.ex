@@ -159,6 +159,42 @@ defmodule ExErlstats do
         end
       end
     end
+    |> maybe_add_gproc_info(pid)
+    |> maybe_add_dictionary_initial_call(pid)
+  end
+
+  # refer to: https://github.com/uwiger/gproc/wiki/The-gproc-api
+  defp maybe_add_gproc_info(kw, pid) do
+    if Code.ensure_loaded?(:gproc) do
+      case :gproc.info(pid, :gproc) do
+        {:gproc, [{{type, scope, name}, _} | _]} ->
+          kw
+          |> Keyword.put(:gproc_type, type)
+          |> Keyword.put(:gproc_scope, scope)
+          |> Keyword.put(:gproc_name, name)
+
+        _ ->
+          kw
+      end
+    else
+      kw
+    end
+  end
+
+  defp maybe_add_dictionary_initial_call(kw, pid) do
+    case Process.info(pid, :dictionary) do
+      {:dictionary, dict} ->
+        case Keyword.get(dict, :"$initial_call") do
+          {m, f, a} ->
+            Keyword.put(kw, :dict_initial_call, "#{m}.#{f}/#{a}")
+
+          _ ->
+            kw
+        end
+
+      _ ->
+        kw
+    end
   end
 
   defp charlist_to_str({k, v}) when k in [:otp_release, :version], do: String.Chars.to_string(v)

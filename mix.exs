@@ -4,7 +4,7 @@ defmodule ExErlstats.Mixfile do
   def project do
     [
       app: :ex_erlstats,
-      version: "0.1.7",
+      version: "0.1.8",
       name: "ExErlstats",
       description: "A simple module to get erlang VM stats",
       source_url: "https://github.com/techgaun/ex_erlstats",
@@ -14,7 +14,8 @@ defmodule ExErlstats.Mixfile do
       start_permanent: Mix.env() == :prod,
       docs: [extras: ["README.md"]],
       package: package(),
-      deps: deps()
+      deps: deps(),
+      xref: [exclude: [:gproc]]
     ]
   end
 
@@ -37,6 +38,7 @@ defmodule ExErlstats.Mixfile do
   defp deps do
     [
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
+      {:gproc, ">= 0.3.0", optional: true}
     ]
   end
 
